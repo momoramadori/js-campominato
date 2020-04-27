@@ -10,7 +10,6 @@
 
 //DA FARE IL BONUS!!!!!!!!!!!!!
 
-
 // var difficolta = prompt('Scegli un livello di difficoltà 0,1 o 2');
 // //Difficoltà 0
 // if (difficolta == "0") {
