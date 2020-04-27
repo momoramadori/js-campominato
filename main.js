@@ -10,20 +10,20 @@
 
 //DA FARE IL BONUS!!!!!!!!!!!!!
 
-// var difficolta = prompt('Scegli un livello di difficoltà 0,1 o 2');
-// //Difficoltà 0
-// if (difficolta == "0") {
-//  var bomba = randomGenerator(1,100);
-// } else if (difficolta == "1") {
-//     bomba = randomGenerator(1,80);
-// } else if (difficolta == "2") {
-//     bomba = randomGenerator(1,50);
-// }
+var difficolta = prompt('Scegli un livello di difficoltà 0,1 o 2');
+//Difficoltà 0
+if (difficolta == "0") {
+ var nP = 100;
+} else if (difficolta == "1") {
+    nP = 80;
+} else if (difficolta == "2") {
+    nP = 50;
+}
 
 //Generare 16 numeri casuali tra 1 e 100 (le mine)
 var numeroCasuale = [];
 while (numeroCasuale.length < 16) {
-    var bomba = randomGenerator(1,100);
+    var bomba = randomGenerator(1,nP);
     if (numeroCasuale.includes(bomba) == false) {
         numeroCasuale.push(bomba);
     }
@@ -33,11 +33,11 @@ console.log(numeroCasuale);
 //In seguito deve chiedere all'utente di inserire un numero alla volta, sempre compreso tra 1 e 100, che sarà la sua giocata.
 var numeriUtente = [];
 do {
-    var giocataUtente = parseInt(prompt('Inserisci un numero tra 1 e 100'));
+    var giocataUtente = parseInt(prompt('Inserisci un numero tra 1 e ' + nP));
     numeriUtente.push(giocataUtente);
-} while ( numeroCasuale.includes(giocataUtente) == false && numeriUtente.length < 84 );
+} while ( numeroCasuale.includes(giocataUtente) == false && numeriUtente.length < nP - 16 );
 
-if (numeriUtente.length == 84) {
+if (numeriUtente.length == nP - 16) {
     console.log('Complimenti, non hai preso nessuna bomba ed hai vinto!');
 } else {
     console.log('Hai preso una bomba! il tuo punteggio è: ' + (numeriUtente.length - 1));
