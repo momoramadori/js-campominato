@@ -4,8 +4,29 @@
         <meta charset="utf-8">
         <title>Campo Minato</title>
         <link rel="stylesheet" href="style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
     </head>
     <body>
+        <header>
+        <h1>Campominato</h1>
+        <label for="levels">Scegli il livello di difficoltà</label>
+        <select id="levels">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+        </select>
+        <button>Gioca!</button>
+        </header>
+        <main>
+            <input type="text">
+            <div class="griglia active">
+
+            </div>
+        </main>
+        <script id="entry-template" type="text/x-handlebars-template">
+            <div class="entry">{{number}}</div>
+        </script>
         <script src="main.js" charset="utf-8"></script>
     </body>
 </html>
