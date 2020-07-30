@@ -39,6 +39,7 @@ button {
     color: white;
     padding: 10px;
     background-color: green;
+    font-family: 'Orbitron', sans-serif;
 }
 
 main {
@@ -77,7 +78,7 @@ img {
     flex-wrap: wrap;
     width: 500px;
     pointer-events: none;
-    font-size: 24px;
+    margin: 50px 0;
 }
 
 .grid.active { 
@@ -160,7 +161,6 @@ p {
     }
 
     .grid {
-        margin-top: 20px;
         width: 300px;
     }
     .entry {
