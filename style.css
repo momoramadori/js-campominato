@@ -2,6 +2,10 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
+}
+
+body {
     background-color: rgb(192, 192, 192);
     font-family: 'Orbitron', sans-serif;
 }
@@ -25,6 +29,10 @@ h1 {
     height: 75px;
     border: 10px groove rgb(192, 192, 192);
     text-align: center;
+}
+
+select {
+    padding: 5px;
 }
 
 button {
@@ -58,7 +66,7 @@ h3 {
 }
 
 img {
-    width: 300px;
+    max-width: 300px;
     height: auto;
     margin-bottom: 20px;
 }
@@ -128,4 +136,51 @@ p {
     -moz-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     -o-transform: translate(-50%, -50%);
+}
+@media (max-width: 900px) {
+
+    h1  {
+        font-size: 16px;
+    }
+
+    img {
+        width: 100px;
+        margin-top: 10px;
+        margin-bottom: 0;
+    }
+
+    .description {
+        width: 100%;
+    }
+
+    .starter {
+        flex-direction: column;
+        height: 100px;
+    }
+    
+    h3 {
+        font-size: 28px;
+    }
+
+    main {
+        height: calc( 100vh -200px);
+    }
+
+    .grid {
+        width: 300px;
+    }
+    .entry {
+        width: 30px;
+        height: 30px;
+    }
+
+    .message {
+        padding: 5px;
+    }
+}
+
+@media (orientation: landscape) {
+    main {
+        height: 100%;
+    }
 }
