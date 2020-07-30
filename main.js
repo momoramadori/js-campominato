@@ -16,9 +16,9 @@ numeroCasuale = [];
 
 $('button').click(function(){
     $('.description').addClass('hidden');
-    $('.griglia').empty();
-    $('.griglia').append('<div class="layer-loser hidden"></div>');
-    $('.griglia').addClass('active');
+    $('.grid').empty();
+    $('.grid').append('<div class="layer-loser hidden"></div>');
+    $('.grid').addClass('active');
     $('.message').addClass('hidden');
 
     // Prendo la difficoltà scelta dall'utente e creo il relativo campo minato
@@ -53,7 +53,7 @@ $('button').click(function(){
             bomb: '<i class="fas fa-bomb hidden"></i>'
         };
         var html = template(context);
-        $('.griglia').append(html);
+        $('.grid').append(html);
     }
 
 
@@ -80,11 +80,11 @@ $('body').on('click','.entry', function(){
             //faccio apparire la bomba
             $(this).find('i').removeClass('hidden');
             //non posso più cliccare nulla sulla griglia
-            $('.griglia').removeClass('active');
+            $('.grid').removeClass('active');
             //la griglia viene oscurata
             $('.layer-loser').removeClass('hidden');
             $('.message').removeClass('hidden');
-            $('.punteggio').text($('.alive').length)
+            $('.score').text($('.alive').length)
             numeroCasuale = [];
        } else {
             $(this).addClass('alive');
