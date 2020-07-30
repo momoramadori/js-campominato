@@ -4,28 +4,44 @@
         <meta charset="utf-8">
         <title>Campo Minato</title>
         <link rel="stylesheet" href="style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/a41fcd4d62.js" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
     </head>
     <body>
         <header>
-        <h1>Campominato</h1>
-        <label for="levels">Scegli il livello di difficoltà</label>
-        <select id="levels">
-            <option value="0">0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-        </select>
-        <button>Gioca!</button>
-        </header>
-        <main>
-            <input type="text">
-            <div class="griglia active">
-
+            <div class="title-section">
+                <h1>Gioca ora a Campominato!</h1>
             </div>
+        <div class='starter'>
+            <div class="selector">
+                <label for="levels">Scegli il livello di difficoltà</label>
+                <select id="levels">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                </select>
+            </div>
+            <button>Clicca per giocare!</button>
+        </div>
+        </header>
+
+        <main>
+            <div class="message hidden">
+                <h1 class='red'>HAI PERSO!</h1>
+                <p>Il tuo punteggio è di:  <span class='punteggio'></span></p>
+            </div>
+            <div class ='description'>
+                <img src="img/bomba.png" alt="Bomba che sta per esplodere">
+                <h3>
+                    Campo minato è un videogioco per PC per singolo giocatore inventato da Robert Donner e Curt Johnson nel 1989. Lo scopo del gioco è ripulire un campo minato senza far esplodere le mine.
+                </h3>
+            </div>
+            <div class="griglia active"> </div>
         </main>
         <script id="entry-template" type="text/x-handlebars-template">
-            <div class="entry">{{number}}</div>
+            <div class="entry" data-number='{{number}}'>{{{bomb}}}</div>
         </script>
         <script src="main.js" charset="utf-8"></script>
     </body>

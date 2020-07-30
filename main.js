@@ -15,8 +15,12 @@ var numeroMine = 16;
 numeroCasuale = [];
 
 $('button').click(function(){
+    $('.description').addClass('hidden');
     $('.griglia').empty();
-    $('.griglia').addClass('active')
+    $('.griglia').append('<div class="layer-loser hidden"></div>');
+    $('.griglia').addClass('active');
+    $('.message').addClass('hidden');
+
     // Prendo la difficoltà scelta dall'utente e creo il relativo campo minato
     var difficolta = $('select').val();
     if (difficolta == "0") {
@@ -44,13 +48,16 @@ $('button').click(function(){
     var source   = document.getElementById("entry-template").innerHTML;
     var template = Handlebars.compile(source);
     for (let index = 0; index < numeriPossibili; index++) {
-        var context = {number: rangeNumbers[index]};
+        var context = {
+            number: rangeNumbers[index],
+            bomb: '<i class="fas fa-bomb hidden"></i>'
+        };
         var html = template(context);
         $('.griglia').append(html);
     }
 
 
-    // //In seguito deve chiedere all'utente di inserire un numero alla volta, sempre compreso tra 1 e 100, che sarà la sua giocata.
+    //In seguito deve chiedere all'utente di inserire un numero alla volta, sempre compreso tra 1 e 100, che sarà la sua giocata.
     // var numeriUtente = [];
     // do {
     //     var giocataUtente = parseInt(prompt('Inserisci un numero tra 1 e ' + numeriPossibili));
@@ -68,15 +75,19 @@ $('button').click(function(){
 
 $('body').on('click','.entry', function(){
     console.log(numeroCasuale);
-       if (numeroCasuale.includes(parseInt($(this).text()))) {
-        $(this).empty();
-        $(this).addClass('red')
-        $('.griglia').removeClass('active')
-        numeroCasuale = [];
-        alert('gioco finito, hai perso!');
+    //se l'utente ha preso una bomba
+       if (numeroCasuale.includes(parseInt($(this).data('number')))) {
+            //faccio apparire la bomba
+            $(this).find('i').removeClass('hidden');
+            //non posso più cliccare nulla sulla griglia
+            $('.griglia').removeClass('active');
+            //la griglia viene oscurata
+            $('.layer-loser').removeClass('hidden');
+            $('.message').removeClass('hidden');
+            $('.punteggio').text($('.alive').length)
+            numeroCasuale = [];
        } else {
-        $(this).empty();
-        $(this).addClass('green')
+            $(this).addClass('alive');
        }
     })
 
