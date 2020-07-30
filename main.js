@@ -16,7 +16,9 @@ numeroCasuale = [];
 
 $('button').click(function(){
     $('.description').addClass('hidden');
+
     $('.grid').empty();
+    $('.grid').removeClass('hidden');
     $('.grid').append('<div class="layer-loser hidden"></div>');
     $('.grid').addClass('active');
     $('.message').addClass('hidden');
@@ -84,7 +86,7 @@ $('body').on('click','.entry', function(){
             //la griglia viene oscurata
             $('.layer-loser').removeClass('hidden');
             $('.message').removeClass('hidden');
-            $('.score').text($('.alive').length)
+            $('.score').text($('.alive').length);
             numeroCasuale = [];
        } else {
             $(this).addClass('alive');

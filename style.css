@@ -44,7 +44,7 @@ button {
 
 main {
     width: 100%;
-    height: calc( 100vh - 170px);
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -127,7 +127,7 @@ p {
 
 .message {
     padding: 30px;
-    margin-top: 20px;
+    margin: 20px 0;
     border: 5px groove rgb(192,192,192);
 }
 
@@ -140,7 +140,6 @@ p {
     img {
         width: 100px;
         margin-top: 10px;
-        margin-bottom: 0;
     }
 
     .description {
@@ -174,7 +173,29 @@ p {
 }
 
 @media (orientation: landscape) {
-    main {
-        height: 100%;
+    @media (max-width: 900px) {
+        main {
+            display: flex;
+            height: 100%;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+        .grid {
+            margin: 20px 0;
+        }
+
+        .starter {
+            flex-direction: row;
+            height: 60px;
+        }
+
+        img {
+            display: none;
+        }
+
+        .title-section {
+            display: none;
+        }
     }
+    
 }
