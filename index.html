@@ -34,10 +34,7 @@
         </header>
 
         <main>
-            <div class="message hidden">
-                <h1 class='red'>HAI PERSO!</h1>
-                <p>Il tuo punteggio è di:  <span class='score'></span></p>
-            </div>
+           
             <div class ='description'>
                 <img src="img/bomb.png" alt="Bomba che sta per esplodere">
                 <h3>
@@ -45,6 +42,10 @@
                 </h3>
             </div>
             <div class="grid active"> </div>
+            <div class="message hidden">
+                <h1 class='red'>HAI PERSO!</h1>
+                <p>Il tuo punteggio è di:  <span class='score'></span></p>
+            </div>
         </main>
         <script id="entry-template" type="text/x-handlebars-template">
             <div class="entry" data-number='{{number}}'>{{{bomb}}}</div>

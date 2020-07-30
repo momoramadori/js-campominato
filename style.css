@@ -126,17 +126,10 @@ p {
 
 .message {
     padding: 30px;
+    margin-top: 20px;
     border: 5px groove rgb(192,192,192);
-    z-index: 10;
-    position: absolute;
-    left: 50%;
-    top: 61.5%;
-    transform: translate(-50%, -50%);
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    -o-transform: translate(-50%, -50%);
 }
+
 @media (max-width: 900px) {
 
     h1  {
@@ -167,6 +160,7 @@ p {
     }
 
     .grid {
+        margin-top: 20px;
         width: 300px;
     }
     .entry {
