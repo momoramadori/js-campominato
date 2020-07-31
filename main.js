@@ -8,18 +8,26 @@
 // con difficoltà 1 => si gioca con numeri che vanno da 1 a 80
 // con difficoltà 2 => si gioca con numeri che vanno da 1 a 50
 
-
+//creo la prima versione della griglia
+handlebarsGridGenerator(100);
 //Creo una variabile per poter variare il numero
 var numeroMine = 16;
 //Instanzio l'array dei numeri casuali fuori così da poterlo riutilizza lo stesso nei due click
 var numeroCasuale = [];
 //Instanzio a zero l'array delle mine
 var numeriPossibili = 0;
+//instanzio la variabile per il timer
+var i = 0;
 
 $('button').click(function(){
-    //al click per giocare compio queste azioni di "default"
+
+    //disabilito il bottone dopo averlo cliccato
+    $(this).prop("disabled",true);
+    //azzero il conteggio di punti e tempo
+    $('.count p').text('000');
+    //azzero l'array di numeri casuali per poterne generare uno nuovo ad un nuovo click (nuova partita)
     numeroCasuale = [];
-    $('.starter').addClass('hidden')
+
     $('.grid').empty();
     $('.grid').removeClass('hidden');
     $('.grid-container').removeClass('hidden');
@@ -31,7 +39,18 @@ $('button').click(function(){
     //Generare 16 numeri casuali tra 1 e max (le mine)
     mineGenerator();
     //creo la griglia del campo minato utilizzando Handlebars
-    handlebarsGridGenerator();
+    handlebarsGridGenerator(numeriPossibili);
+    //gestione del timer
+    timer = setInterval(function(){
+        if (i < 10) {
+            $('.time p').text('00' + i)
+        } else if (i >= 10) {
+            $('.time p').text('0' + i)
+        } else if(i >= 100) {
+            $('.time p').text( i)
+        }
+        i++
+    },1000);
 })
 
 //gestisco la partita dell'utente
@@ -49,12 +68,13 @@ $('body').on('click','.entry', function(){
             $('.message h1').text('HAI PERSO!');
             //compare il messaggio di sconfitta
             $('.message').removeClass('hidden');
+            //resetto il timer
+            clearInterval(timer);
+            i = 0;
+            $('.board button').prop("disabled",false);
        } else {
             $(this).addClass('alive');
             //se non prende nessuna mina allora ha vinto
-            console.log($('.alive').length);
-            console.log(numeriPossibili);
-            console.log(numeroCasuale.length);
             if($('.alive').length == numeriPossibili - numeroCasuale.length) {
                 $('.grid').removeClass('active');
                 $('.layer-loser').removeClass('hidden');
@@ -65,6 +85,12 @@ $('body').on('click','.entry', function(){
        }
        //il numero delle caselle cliccate corrisponde al puunteggio
        $('.score').text($('.alive').length);
+       //aggiornare il tabellone del punteggio ad ogni click
+       if($('.alive').length < 10) {
+            $('.points p').text( '00' + $('.alive').length)
+       } else if ($('.alive').length >= 10) {
+            $('.points p').text('0' + $('.alive').length)
+       }
     })
 
 function randomGenerator(min,max) {
@@ -92,7 +118,7 @@ function mineGenerator() {
     return numeroCasuale;
 }
 
-function handlebarsGridGenerator(){
+function handlebarsGridGenerator(numeriPossibili){
     //creo un array con numeri da 1 a numeriPossibili per generare tutte le caselle
     var rangeNumbers = [];
     for (let index = 1; index <= numeriPossibili; index++) {

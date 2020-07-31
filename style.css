@@ -93,8 +93,9 @@ p {
  }
 
  .count {
-     display: flex;
-     align-items: center;
+    min-width: 75px;
+    display: flex;
+    align-items: center;
     font-size: 30px;
     background-color: black;
     color: red;
@@ -182,6 +183,7 @@ i.hidden {
 
     .count {
         font-size: 20px;
+        min-width: 50px;
     }
 
     .entry {
