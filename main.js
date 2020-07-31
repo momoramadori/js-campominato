@@ -27,10 +27,8 @@ $('button').click(function(){
     $('.count p').text('000');
     //azzero l'array di numeri casuali per poterne generare uno nuovo ad un nuovo click (nuova partita)
     numeroCasuale = [];
-
+    //azioni di default per far ristartare il game al click del bottone
     $('.grid').empty();
-    $('.grid').removeClass('hidden');
-    $('.grid-container').removeClass('hidden');
     $('.grid').append('<div class="layer-loser hidden"></div>');
     $('.grid').addClass('active');
     $('.message').addClass('hidden');
@@ -46,8 +44,8 @@ $('button').click(function(){
             $('.time p').text('00' + i)
         } else if (i >= 10) {
             $('.time p').text('0' + i)
-        } else if(i >= 100) {
-            $('.time p').text( i)
+        } else if (i >= 100) {
+            $('.time p').text(i)
         }
         i++
     },1000);
@@ -55,46 +53,65 @@ $('button').click(function(){
 
 //gestisco la partita dell'utente
 $('body').on('click','.entry', function(){
-        //se l'utente ha preso una bomba
-       if (numeroCasuale.includes(parseInt($(this).data('number')))) {
-            //faccio apparire la bomba
-            $(this).find('i').removeClass('hidden');
-            //non posso più cliccare nulla sulla griglia
+    //se l'utente ha preso una bomba
+    if (numeroCasuale.includes(parseInt($(this).data('number')))) {
+        //faccio apparire la bomba
+        $(this).find('i').removeClass('hidden');
+        //non posso più cliccare nulla sulla griglia
+        $('.grid').removeClass('active');
+        //la griglia viene oscurata
+        $('.layer-loser').removeClass('hidden');
+        //caratteristiche del messaggio in caso di sconfitta
+        $('.message h1').removeClass('green');
+        $('.message h1').addClass('red');
+        $('.message h1').html('HAI PERSO!' + ' '+ '<i class="fas fa-sad-cry red"></i>');
+        //compare il messaggio di sconfitta
+        $('.message').removeClass('hidden');
+        //resetto il timer
+        clearInterval(timer);
+        //resetto il counter
+        i = 0;
+        //riattivo il bottone
+        $('.board button').prop("disabled",false);
+    } else {
+        $(this).addClass('alive');
+        //se non prende nessuna mina allora ha vinto
+        if($('.alive').length == numeriPossibili - numeroCasuale.length) {
             $('.grid').removeClass('active');
-            //la griglia viene oscurata
             $('.layer-loser').removeClass('hidden');
-            $('.message h1').removeClass('green');
-            $('.message h1').addClass('red');
-            $('.message h1').text('HAI PERSO!');
-            //compare il messaggio di sconfitta
+            //caratteristiche del messaggio in caso di vittoria
+            $('.message h1').addClass('green');
+            $('.message h1').text('HAI VINTO!');
             $('.message').removeClass('hidden');
-            //resetto il timer
-            clearInterval(timer);
-            i = 0;
-            $('.board button').prop("disabled",false);
-       } else {
-            $(this).addClass('alive');
-            //se non prende nessuna mina allora ha vinto
-            if($('.alive').length == numeriPossibili - numeroCasuale.length) {
-                $('.grid').removeClass('active');
-                $('.layer-loser').removeClass('hidden');
-                $('.message h1').addClass('green');
-                $('.message h1').text('HAI VINTO!');
-                $('.message').removeClass('hidden');
-            }
-       }
-       //il numero delle caselle cliccate corrisponde al puunteggio
-       $('.score').text($('.alive').length);
-       //aggiornare il tabellone del punteggio ad ogni click
-       if($('.alive').length < 10) {
-            $('.points p').text( '00' + $('.alive').length)
-       } else if ($('.alive').length >= 10) {
-            $('.points p').text('0' + $('.alive').length)
-       }
+        }
+    }
+    //il numero delle caselle cliccate corrisponde al puunteggio
+    $('.score').text($('.alive').length);
+    //aggiornare il tabellone del punteggio ad ogni click
+    if($('.alive').length < 10) {
+        $('.points p').text( '00' + $('.alive').length)
+    } else if ($('.alive').length >= 10) {
+        $('.points p').text('0' + $('.alive').length)
+    }
     })
 
-function randomGenerator(min,max) {
-    return Math.floor(Math.random() * (max - min + 1) ) + min;
+function handlebarsGridGenerator(numeriPossibili){
+    //creo un array con numeri da 1 a numeriPossibili per generare tutte le caselle
+    var rangeNumbers = [];
+    for (let index = 1; index <= numeriPossibili; index++) {
+        rangeNumbers.push(index);
+    }
+    //utilizzo la funzione base di handlebars per generare il template
+    var source   = document.getElementById("entry-template").innerHTML;
+    var template = Handlebars.compile(source);
+    for (let index = 0; index < numeriPossibili; index++) {
+        var context = {
+            number: rangeNumbers[index],
+            bomb: '<i class="fas fa-bomb hidden"></i>'
+        };
+        var html = template(context);
+        $('.grid').append(html);
+    }
 }
 
 function creazioneCampo() {
@@ -118,21 +135,6 @@ function mineGenerator() {
     return numeroCasuale;
 }
 
-function handlebarsGridGenerator(numeriPossibili){
-    //creo un array con numeri da 1 a numeriPossibili per generare tutte le caselle
-    var rangeNumbers = [];
-    for (let index = 1; index <= numeriPossibili; index++) {
-        rangeNumbers.push(index);
-    }
-    //utilizzo la funzione base di handlebars per generare il template
-    var source   = document.getElementById("entry-template").innerHTML;
-    var template = Handlebars.compile(source);
-    for (let index = 0; index < numeriPossibili; index++) {
-        var context = {
-            number: rangeNumbers[index],
-            bomb: '<i class="fas fa-bomb hidden"></i>'
-        };
-        var html = template(context);
-        $('.grid').append(html);
-    }
+function randomGenerator(min,max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
 }

@@ -9,33 +9,6 @@ body {
     font-family: 'Orbitron', sans-serif;
 }
 
-/* HEADER */
-
-.starter {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100vw;
-    background-color: black;
-    height: 100vh;
-    border: 10px groove rgb(192, 192, 192);
-    text-align: center;
-}
-
-.starter button {
-    font-family: 'Orbitron', sans-serif;
-    padding: 20px;
-    border: 20px groove rgb(192, 192, 192);
-    color: red;
-    font-size: 40px;
-}
-
-#levels {
-    padding: 5px;
-    background-color: black;
-    color: yellow;
-}
-
 /* MAIN */
 
 main {
@@ -48,9 +21,22 @@ main {
 }
 
 .message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
     padding: 30px;
     margin: 20px 0;
     border: 5px groove rgb(192,192,192);
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+}
+
+.message i {
+    font-size: 30px;
 }
 
 .red {
@@ -64,8 +50,6 @@ main {
 p {
     color: white;
 }
-
- /* Realizzazione CSS griglia handlebars */
 
  .grid-container {
     background-color: rgb(192, 192, 192);
@@ -86,6 +70,7 @@ p {
  .board button {
     background-color: black;
  }
+
  .board  button i {
      font-size: 30px;
      padding: 0 5px;
@@ -100,6 +85,12 @@ p {
     background-color: black;
     color: red;
  }
+
+ #levels {
+    padding: 5px;
+    background-color: black;
+    color: yellow;
+}
 
 .grid {
     border: 5px groove rgb(192,192,192);
@@ -154,18 +145,19 @@ i.hidden {
 /* MEDIA QUERY - Gestione Responsive */
 
 @media (max-width: 900px) {
-    .starter button {
-        width: 200px;
-        font-size: 16px;
-    }
+    
     .message {
         padding: 5px;
         background-color: black;
         opacity: 0.7;
     }
 
-    .grid {
-        width: 260px;
+    .message h1 {
+        font-size: 20px;
+    }
+
+    .message p {
+        font-size: 14px;
     }
 
     .grid-container {
@@ -177,13 +169,18 @@ i.hidden {
         border: 5px groove rgb(192,192,192);
         height: 50px;
     }
-    .grid i {
-        font-size: 14px;
-    }
 
     .count {
         font-size: 20px;
         min-width: 50px;
+    }
+
+    .grid i {
+        font-size: 14px;
+    }
+
+    .grid {
+        width: 260px;
     }
 
     .entry {
