@@ -13,34 +13,30 @@
     </head>
     <body>
         <header>
-            <div class="title-section">
-                <h1>
-                    <i class="fas fa-bomb"></i>
-                    Gioca ora a Campo Minato! 
-                    <i class="fas fa-bomb"></i>
-                </h1>
-            </div>
             <div class='starter'>
-                <div class="selector">
-                    <label for="levels">Scegli il livello di difficoltà</label>
+                <button>
+                    Click here!
+                    <i class="fas fa-bomb"></i>
+                </button>
+            </div>
+        </header>
+
+        <main>
+            <div class='grid-container hidden'>
+                <div class="board">
+                    <div class='count points'>000</div>
                     <select id="levels">
                         <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                     </select>
+                    <button>
+                        <i class="fa fa-smile-o" aria-hidden="true"></i>
+                    </button>
+                    <div class='count time'>000</div>
                 </div>
-                <button>Clicca per giocare!</button>
-            </div>
-        </header>
-
-        <main>
-            <div class ='description'>
-                <img src="img/bomb.png" alt="Bomba che sta per esplodere">
-                <h3>
-                    Campo minato è un videogioco per PC per singolo giocatore inventato da Robert Donner e Curt Johnson nel 1989. Lo scopo del gioco è ripulire un campo minato senza far esplodere le mine.
-                </h3>
-            </div>
             <div class="grid active hidden"> </div>
+            </div>
             <div class="message hidden">
                 <h1></h1>
                 <p>Il tuo punteggio è di:  <span class='score'></span></p>

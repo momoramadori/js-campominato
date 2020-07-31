@@ -2,78 +2,49 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
 }
 
 body {
-    background-color: rgb(192, 192, 192);
+    background-color: black;
     font-family: 'Orbitron', sans-serif;
 }
 
 /* HEADER */
 
-.title-section {
-    width: 100%;
-    height: 100px;
-    padding: 20px;
-    display: flex;
-    border: 10px groove rgb(192, 192, 192);
-}
-
-.title-section h1 {
-    margin: auto;
-}
-
 .starter {
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    height: 75px;
+    justify-content: center;
+    width: 100vw;
+    background-color: black;
+    height: 100vh;
     border: 10px groove rgb(192, 192, 192);
     text-align: center;
 }
 
-#levels {
-    padding: 5px;
+.starter button {
+    font-family: 'Orbitron', sans-serif;
+    padding: 20px;
+    border: 20px groove rgb(192, 192, 192);
+    color: red;
+    font-size: 40px;
 }
 
-.starter button {
-    color: white;
-    padding: 10px;
-    background-color: green;
-    font-family: 'Orbitron', sans-serif;
+#levels {
+    padding: 5px;
+    background-color: black;
+    color: yellow;
 }
 
 /* MAIN */
 
 main {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
-}
-
-.description {
-    width: 600px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    font-size: 24px;
-    text-align: center;
-}
-
-.description h3 {
-    border: 5px groove rgb(192,192,192);
-    padding: 20px;
-}
-
-.description img {
-    max-width: 300px;
-    height: auto;
-    margin-bottom: 20px;
+    justify-content: center;
 }
 
 .message {
@@ -96,13 +67,47 @@ p {
 
  /* Realizzazione CSS griglia handlebars */
 
+ .grid-container {
+    background-color: rgb(192, 192, 192);
+    width: 600px;
+    border: 20px ridge rgb(192,192,192);
+    padding: 10px;
+ }
+
+ .grid-container .board {
+     width: 510px;
+     margin: auto;
+     height: 80px;
+     border: 16px groove rgb(180, 180, 180);
+     display: flex;
+     justify-content: space-between;
+}
+
+ .board button {
+    background-color: black;
+ }
+ .board  button i {
+     font-size: 30px;
+     padding: 0 5px;
+     color: yellow;
+ }
+
+ .count {
+     display: flex;
+     align-items: center;
+    font-size: 30px;
+    background-color: black;
+    color: red;
+ }
+
 .grid {
+    border: 5px groove rgb(192,192,192);
+    margin: auto;
     position: relative;
     display: flex;
     flex-wrap: wrap;
-    width: 500px;
+    width: 510px;
     pointer-events: none;
-    margin: 50px 0;
 }
 
 .grid.active { 
@@ -148,33 +153,10 @@ i.hidden {
 /* MEDIA QUERY - Gestione Responsive */
 
 @media (max-width: 900px) {
-
-    .title-section h1  {
+    .starter button {
+        width: 200px;
         font-size: 16px;
     }
-
-    .starter {
-        flex-direction: column;
-        height: 100px;
-    }
-
-    .description {
-        width: 100%;
-    }
-
-    .description img {
-        width: 100px;
-        margin-top: 10px;
-    }
-
-    .description h3 {
-        font-size: 28px;
-    }
-
-    main {
-        height: 100%;
-    }
-
     .message {
         padding: 5px;
         background-color: black;
@@ -182,46 +164,28 @@ i.hidden {
     }
 
     .grid {
-        width: 300px;
+        width: 260px;
     }
 
+    .grid-container {
+        width: 320px;
+    }
+
+    .grid-container .board {
+        width: 260px;       
+        border: 5px groove rgb(192,192,192);
+        height: 50px;
+    }
     .grid i {
         font-size: 14px;
     }
 
-    .entry {
-        width: 30px;
-        height: 30px;
+    .count {
+        font-size: 20px;
     }
 
-   
-}
-
-@media (orientation: landscape) {
-    @media (max-width: 900px) {
-
-        .title-section {
-            display: none;
-        }
-
-        .starter {
-            flex-direction: row;
-            height: 60px;
-        }
-
-        main {
-            display: flex;
-            height: 100%;
-            flex-direction: row;
-            justify-content: space-around;
-        }
-
-        .description img {
-            display: none;
-        }
-
-        .grid {
-            margin: 0;
-        } 
+    .entry {
+        width: 25px;
+        height: 25px;
     }
 }

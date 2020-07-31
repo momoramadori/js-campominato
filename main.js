@@ -19,9 +19,10 @@ var numeriPossibili = 0;
 $('button').click(function(){
     //al click per giocare compio queste azioni di "default"
     numeroCasuale = [];
-    $('.description').addClass('hidden');
+    $('.starter').addClass('hidden')
     $('.grid').empty();
     $('.grid').removeClass('hidden');
+    $('.grid-container').removeClass('hidden');
     $('.grid').append('<div class="layer-loser hidden"></div>');
     $('.grid').addClass('active');
     $('.message').addClass('hidden');
