@@ -81,7 +81,7 @@ $('body').on('click','.entry', function(){
             $('.layer-loser').removeClass('hidden');
             //caratteristiche del messaggio in caso di vittoria
             $('.message h1').addClass('green');
-            $('.message h1').text('HAI VINTO!');
+            $('.message h1').text('HAI VINTO!' + ' ' + '<i class="fas fa-laugh green"></i>');
             $('.message').removeClass('hidden');
         }
     }

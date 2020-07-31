@@ -39,15 +39,7 @@ main {
     font-size: 30px;
 }
 
-.red {
-    color: red;
-}
-
-.green {
-    color: green;
-}
-
-p {
+.message p {
     color: white;
 }
 
@@ -140,6 +132,14 @@ p {
 
 i.hidden {
     display: none;
+}
+
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
 }
 
 /* MEDIA QUERY - Gestione Responsive */
