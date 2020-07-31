@@ -12,41 +12,92 @@
 //Creo una variabile per poter variare il numero
 var numeroMine = 16;
 //Instanzio l'array dei numeri casuali fuori così da poterlo riutilizza lo stesso nei due click
-numeroCasuale = [];
+var numeroCasuale = [];
+//Instanzio a zero l'array delle mine
+var numeriPossibili = 0;
 
 $('button').click(function(){
+    //al click per giocare compio queste azioni di "default"
+    numeroCasuale = [];
     $('.description').addClass('hidden');
-
     $('.grid').empty();
     $('.grid').removeClass('hidden');
     $('.grid').append('<div class="layer-loser hidden"></div>');
     $('.grid').addClass('active');
     $('.message').addClass('hidden');
-
     // Prendo la difficoltà scelta dall'utente e creo il relativo campo minato
+    creazioneCampo();
+    //Generare 16 numeri casuali tra 1 e max (le mine)
+    mineGenerator();
+    //creo la griglia del campo minato utilizzando Handlebars
+    handlebarsGridGenerator();
+})
+
+//gestisco la partita dell'utente
+$('body').on('click','.entry', function(){
+        //se l'utente ha preso una bomba
+       if (numeroCasuale.includes(parseInt($(this).data('number')))) {
+            //faccio apparire la bomba
+            $(this).find('i').removeClass('hidden');
+            //non posso più cliccare nulla sulla griglia
+            $('.grid').removeClass('active');
+            //la griglia viene oscurata
+            $('.layer-loser').removeClass('hidden');
+            $('.message h1').removeClass('green');
+            $('.message h1').addClass('red');
+            $('.message h1').text('HAI PERSO!');
+            //compare il messaggio di sconfitta
+            $('.message').removeClass('hidden');
+       } else {
+            $(this).addClass('alive');
+            //se non prende nessuna mina allora ha vinto
+            console.log($('.alive').length);
+            console.log(numeriPossibili);
+            console.log(numeroCasuale.length);
+            if($('.alive').length == numeriPossibili - numeroCasuale.length) {
+                $('.grid').removeClass('active');
+                $('.layer-loser').removeClass('hidden');
+                $('.message h1').addClass('green');
+                $('.message h1').text('HAI VINTO!');
+                $('.message').removeClass('hidden');
+            }
+       }
+       //il numero delle caselle cliccate corrisponde al puunteggio
+       $('.score').text($('.alive').length);
+    })
+
+function randomGenerator(min,max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+
+function creazioneCampo() {
     var difficolta = $('select').val();
     if (difficolta == "0") {
-        var numeriPossibili = 100;
-       } else if (difficolta == "1") {
-           numeriPossibili = 80;
-       } else if (difficolta == "2") {
-           numeriPossibili = 50;
-       }
+        return numeriPossibili = 100;
+    } else if (difficolta == "1") {
+        return numeriPossibili = 80;
+    } else if (difficolta == "2") {
+        return numeriPossibili = 50;
+    }
+}
 
-    //Generare 16 numeri casuali tra 1 e max (le mine)
+function mineGenerator() {
     while (numeroCasuale.length < numeroMine) {
         var bomba = randomGenerator(1,numeriPossibili);
         if (numeroCasuale.includes(bomba) == false) {
             numeroCasuale.push(bomba);
         }
     }
-    console.log(numeroCasuale);
+    return numeroCasuale;
+}
 
-    //creo un array con numeri da 1 a numeriPossibili
+function handlebarsGridGenerator(){
+    //creo un array con numeri da 1 a numeriPossibili per generare tutte le caselle
     var rangeNumbers = [];
     for (let index = 1; index <= numeriPossibili; index++) {
         rangeNumbers.push(index);
     }
+    //utilizzo la funzione base di handlebars per generare il template
     var source   = document.getElementById("entry-template").innerHTML;
     var template = Handlebars.compile(source);
     for (let index = 0; index < numeriPossibili; index++) {
@@ -57,44 +108,4 @@ $('button').click(function(){
         var html = template(context);
         $('.grid').append(html);
     }
-
-
-    //In seguito deve chiedere all'utente di inserire un numero alla volta, sempre compreso tra 1 e 100, che sarà la sua giocata.
-    // var numeriUtente = [];
-    // do {
-    //     var giocataUtente = parseInt(prompt('Inserisci un numero tra 1 e ' + numeriPossibili));
-    //     numeriUtente.push(giocataUtente);
-    // } while ( numeroCasuale.includes(giocataUtente) == false && numeriUtente.length < numeriPossibili - numeroMine );
-
-    // if (numeriUtente.length == numeriPossibili - numeroMine) {
-    //     console.log('Complimenti, non hai preso nessuna bomba ed hai vinto!');
-    // } else {
-    //     console.log('Hai preso una bomba! il tuo punteggio è: ' + (numeriUtente.length - 1));
-    // }
-
-    
-})
-
-$('body').on('click','.entry', function(){
-    console.log(numeroCasuale);
-    //se l'utente ha preso una bomba
-       if (numeroCasuale.includes(parseInt($(this).data('number')))) {
-            //faccio apparire la bomba
-            $(this).find('i').removeClass('hidden');
-            //non posso più cliccare nulla sulla griglia
-            $('.grid').removeClass('active');
-            //la griglia viene oscurata
-            $('.layer-loser').removeClass('hidden');
-            $('.message').removeClass('hidden');
-            $('.score').text($('.alive').length);
-            numeroCasuale = [];
-       } else {
-            $(this).addClass('alive');
-       }
-    })
-
-
-
-function randomGenerator(min,max) {
-    return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
