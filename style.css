@@ -10,6 +10,8 @@ body {
     font-family: 'Orbitron', sans-serif;
 }
 
+/* HEADER */
+
 .title-section {
     width: 100%;
     height: 100px;
@@ -18,7 +20,7 @@ body {
     border: 10px groove rgb(192, 192, 192);
 }
 
-h1 {
+.title-section h1 {
     margin: auto;
 }
 
@@ -31,16 +33,18 @@ h1 {
     text-align: center;
 }
 
-select {
+#levels {
     padding: 5px;
 }
 
-button {
+.starter button {
     color: white;
     padding: 10px;
     background-color: green;
     font-family: 'Orbitron', sans-serif;
 }
+
+/* MAIN */
 
 main {
     width: 100%;
@@ -61,16 +65,32 @@ main {
     text-align: center;
 }
 
-h3 {
+.description h3 {
     border: 5px groove rgb(192,192,192);
     padding: 20px;
 }
 
-img {
+.description img {
     max-width: 300px;
     height: auto;
     margin-bottom: 20px;
 }
+
+.message {
+    padding: 30px;
+    margin: 20px 0;
+    border: 5px groove rgb(192,192,192);
+}
+
+.red {
+    color: red;
+}
+
+p {
+    color: white;
+}
+
+ /* Realizzazione CSS griglia handlebars */
 
 .grid {
     position: relative;
@@ -88,6 +108,7 @@ img {
 .grid i {
     font-size: 20px;
 }
+
 .layer-loser {
     position: absolute;
     left: 0;
@@ -120,44 +141,29 @@ i.hidden {
     display: none;
 }
 
-.red {
-    color: red;
-}
-
-p {
-    color: white;
-}
-
-.message {
-    padding: 30px;
-    margin: 20px 0;
-    border: 5px groove rgb(192,192,192);
-}
+/* MEDIA QUERY - Gestione Responsive */
 
 @media (max-width: 900px) {
 
-    .grid i {
-        font-size: 14px;
-    }
-    h1  {
+    .title-section h1  {
         font-size: 16px;
-    }
-
-    img {
-        width: 100px;
-        margin-top: 10px;
-    }
-
-    .description {
-        width: 100%;
     }
 
     .starter {
         flex-direction: column;
         height: 100px;
     }
-    
-    h3 {
+
+    .description {
+        width: 100%;
+    }
+
+    .description img {
+        width: 100px;
+        margin-top: 10px;
+    }
+
+    .description h3 {
         font-size: 28px;
     }
 
@@ -165,29 +171,33 @@ p {
         height: 100%;
     }
 
+    .message {
+        padding: 5px;
+        background-color: black;
+        opacity: 0.7;
+    }
+
     .grid {
         width: 300px;
     }
+
+    .grid i {
+        font-size: 14px;
+    }
+
     .entry {
         width: 30px;
         height: 30px;
     }
 
-    .message {
-        padding: 5px;
-    }
+   
 }
 
 @media (orientation: landscape) {
     @media (max-width: 900px) {
-        main {
-            display: flex;
-            height: 100%;
-            flex-direction: row;
-            justify-content: space-around;
-        }
-        .grid {
-            margin: 0;
+
+        .title-section {
+            display: none;
         }
 
         .starter {
@@ -195,13 +205,19 @@ p {
             height: 60px;
         }
 
-        img {
+        main {
+            display: flex;
+            height: 100%;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+
+        .description img {
             display: none;
         }
 
-        .title-section {
-            display: none;
-        }
+        .grid {
+            margin: 0;
+        } 
     }
-    
 }
